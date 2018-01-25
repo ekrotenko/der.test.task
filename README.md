@@ -11,11 +11,7 @@ Type `npm -v` in console(cmd | PowerShell | Terminal) to verify successful insta
 3) Replace 'Test_task.html' by correct test file in 'htmlTestPages' folder:
 
 ## Executing tests:
-Execute following commands in terminal:
-```text
-protractor
-```
-or:
+Execute following command in terminal:
 ```text
 npm test
 ```

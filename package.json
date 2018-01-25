@@ -13,11 +13,12 @@
   "scripts": {
     "test": "protractor",
     "postinstall": "webdriver-manager update",
-    "eslint": "eslint"
+    "eslint": "eslint . --fix"
   },
   "author": "Eugene Krotenko",
   "license": "ISC",
   "dependencies": {
+    "eslint": "^4.16.0",
     "jasmine": "^2.9.0",
     "jasmine-data-provider": "^2.2.0",
     "jasmine-reporters": "^2.2.1",
@@ -27,5 +28,12 @@
     "protractor": "^5.1.2",
     "protractor-helpers": "^1.1.472",
     "protractor-screenshoter-plugin": "^0.9.0"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1"
   }
 }

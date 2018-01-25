@@ -1,0 +1,19 @@
+{
+  "extends": "standard",
+  "globals": {
+    "ptorHelper": true,
+    "projectDir": true,
+    "htmlPages": true,
+    "using": true
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "protractor": true,
+    "jasmine": true
+  },
+  "rules":{
+    "max-line-length": [true, 120],
+    "semi": [2, "always"]
+  }
+}
