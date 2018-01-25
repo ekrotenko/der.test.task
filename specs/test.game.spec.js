@@ -40,9 +40,9 @@ describe('Test gamble', () => {
                     .toBe(testData.winMessage.replace('#', winAmount), 'Win message content is incorrect');
             });
 
-            it(`should blink ${combination} in ${pattern}`, async () => {
+            it(`should blink '${combination}' combination in '${pattern}' line`, async () => {
                 expect(await testGamblePage.getBlinkedCharacters())
-                    .toBe(combination, `Matching ${combination} does not blink in ${pattern}`);
+                    .toBe(combination, `Matching ${combination} does not blink in '${pattern}' line`);
             });
 
             it(`should disable spin button`, async () => {
