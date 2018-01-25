@@ -8,7 +8,7 @@ Type `npm -v` in console(cmd | PowerShell | Terminal) to verify successful insta
 
 1) Clone the project and navigate to the cloned folder.
 2) Run `npm install` to install all required packages.
-3) Replace 'Test_task.html' by correct test file in 'html.test.pages' folder:
+3) Replace 'Test_task.html' by correct test file in 'htmlTestPages' folder:
 
 ## Executing tests:
 Execute following commands in terminal:

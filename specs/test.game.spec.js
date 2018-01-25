@@ -1,7 +1,7 @@
-const testGamblePage = require(`${projectDir}/pages/test.gamble.pages/test.gamble.page`);
+const testGamblePage = require(`${projectDir}/pages/testGamblePages/test.gamble.page`);
 const dataHelper = require(`${projectDir}/helpers/data.helper`);
 
-const testData = require(`${projectDir}/data/test.game/test.game.data`);
+const testData = require(`${projectDir}/data/testGamble/test.game.data`);
 
 describe('Test gamble', () => {
     let expectedBalance;
