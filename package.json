@@ -1,0 +1,29 @@
+{
+  "name": "Dervico.test.task",
+  "version": "1.0.0",
+  "description": "Project of Dervico test task",
+  "main": "protractor.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ekrotenko/der.test.task.git"
+  },
+  "directories": {
+    "test": "specs"
+  },
+  "scripts": {
+    "test": "protractor",
+    "postinstall": "webdriver-manager update",
+    "eslint": "eslint"
+  },
+  "author": "Eugene Krotenko",
+  "license": "ISC",
+  "dependencies": {
+    "jasmine": "^2.9.0",
+    "jasmine-data-provider": "^2.2.0",
+    "jasmine-reporters": "^2.2.1",
+    "jasmine-spec-reporter": "^4.1.1",
+    "path": "^0.12.7",
+    "protractor": "^5.1.2",
+    "protractor-helpers": "^1.1.472"
+  }
+}
