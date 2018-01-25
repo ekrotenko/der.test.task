@@ -22,8 +22,10 @@
     "jasmine-data-provider": "^2.2.0",
     "jasmine-reporters": "^2.2.1",
     "jasmine-spec-reporter": "^4.1.1",
+    "moment": "^2.20.1",
     "path": "^0.12.7",
     "protractor": "^5.1.2",
-    "protractor-helpers": "^1.1.472"
+    "protractor-helpers": "^1.1.472",
+    "protractor-screenshoter-plugin": "^0.9.0"
   }
 }

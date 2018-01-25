@@ -18,7 +18,7 @@ describe('Test gamble', () => {
     });
 
     using(testData.winCombinations, (winAmount, combination) => {
-        describe(`win combination ${combination}`, () => {
+        describe(`with win combination ${combination}`, () => {
             let currentBalance;
             let pattern = dataHelper.generateValidCombination(combination);
 
@@ -49,7 +49,7 @@ describe('Test gamble', () => {
                 expect(await testGamblePage.isSpinButtonEnabled()).toBeFalsy('Spin button is enabled');
             });
 
-            it(`should mark combination as achieved`, async() => {
+            it(`should mark combination as achieved`, async () => {
                 expect(await testGamblePage.isWinAchieved(combination))
                     .toBeTruthy('Combination is not marked as achieved in paytable')
             });
@@ -57,7 +57,7 @@ describe('Test gamble', () => {
         });
     });
 
-    it('should not go to negative balance', async()=>{
+    it('should not go to negative balance', async () => {
         await testGamblePage.setPatternValue(testData.emptyPattern);
         await testGamblePage.setBalance(testData.zeroBalance);
         await testGamblePage.spin();

@@ -20,5 +20,7 @@ or:
 npm test
 ```
 
+## Viewing report
+After test run completed you can view html test report with screenshots which is located in html-report folder
 
 Happy testing!
