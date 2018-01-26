@@ -12,7 +12,7 @@
   },
   "scripts": {
     "test": "protractor",
-    "postinstall": "webdriver-manager update",
+    "pretest": "webdriver-manager update",
     "eslint": "eslint . --fix"
   },
   "author": "Eugene Krotenko",
