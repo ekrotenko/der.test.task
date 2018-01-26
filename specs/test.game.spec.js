@@ -96,13 +96,14 @@ describe('Test gamble', () => {
     });
 
     it('should disable spin button', async () => {
-      expect(await testGamblePage.isSpinButtonEnabled()).toBeFalsy(testData.zeroBalance);
+      expect(await testGamblePage.isSpinButtonEnabled()).toBeFalsy('Spin button is enabled');
     });
 
     it('should not go to negative balance after spin', async () => {
       await testGamblePage.spin();
 
-      expect(await testGamblePage.getCurrentBalance()).not.toBeLessThan(testData.zeroBalance);
+      expect(await testGamblePage.getCurrentBalance())
+        .not.toBeLessThan(testData.zeroBalance, 'Balance becomes less than 0 after spin');
     });
   });
 });
