@@ -1,5 +1,5 @@
 const TestGamblePage = require(`${projectDir}/pages/testGamblePages/test.gamble.page`);
-const dataHelper = require(`${projectDir}/helpers/data.helper`);
+const dataHelper = require(`${projectDir}/data/helpers/data.helper`);
 
 const testData = require(`${projectDir}/data/testGamble/test.game.data`);
 
@@ -11,39 +11,70 @@ describe('Test gamble', () => {
     testGamblePage = await TestGamblePage.open();
   });
 
-  it('should reduce balance on 1 coin after spin', async () => {
-    expectedBalance = await testGamblePage.getCurrentBalance() - 1;
-    await testGamblePage.spin();
+  describe('initial state', () => {
+    it('should contain correct initial balance', async () => {
+      expect(await testGamblePage.getCurrentBalance()).toBe(testData.initialBalance, 'Initial balance is incorrect');
+    });
 
-    expect(expectedBalance).toBe(await testGamblePage.getCurrentBalance(), 'Balance was note reduced on 1 coin');
+    it('should contain spin button enabled', async () => {
+      expect(await testGamblePage.isSpinButtonEnabled()).toBeTruthy('Spin button is disabled');
+    });
+
+    it('should contain correct specified paytable data', async () => {
+      expect(await testGamblePage.getPaytableData()).toEqual(testData.winCombinations, 'Paytable data is incorrect');
+    });
+
+    it('should not contain any achieved results in paytable', async () => {
+      expect((await testGamblePage.getAchievedResults()).length)
+        .toBe(testData.initialAchievementsCount, 'Some paytable records are achieved');
+    });
   });
 
-  using(testData.winCombinations, (winAmount, combination) => {
-    describe(`with win combination ${combination}`, () => {
-      let currentBalance;
-      let pattern = dataHelper.generateValidCombination(combination);
+  describe('with random flow', () => {
+    it(`should reduce balance on ${testData.gameCost} coin after spin`, async () => {
+      expectedBalance = await testGamblePage.getCurrentBalance() - testData.gameCost;
+      await testGamblePage.spin();
 
-      it(`should increase balance on ${winAmount} coins`, async () => {
+      expect(expectedBalance)
+        .toBe(await testGamblePage.getCurrentBalance(), `Balance was note reduced on ${testData.gameCost} coin`);
+    });
+
+    it(`should not repeat previous result`, async () => {
+      await testGamblePage.spin();
+      const previousResult = await testGamblePage.getSpinResult();
+      await testGamblePage.waitForSpinButtonEnabled();
+      await testGamblePage.spin();
+
+      expect(await testGamblePage.getSpinResult()).not.toBe(previousResult, 'Random result matches previous one');
+    });
+  });
+
+  for (let data of testData.winCombinations) {
+    describe(`with win combination ${data.combination}`, () => {
+      let currentBalance;
+      let pattern = dataHelper.generateValidCombination(data.combination);
+
+      it(`should increase balance on ${data.winAmount} coins`, async () => {
         currentBalance = await testGamblePage.getCurrentBalance();
-        expectedBalance = currentBalance - 1 + winAmount;
+        expectedBalance = currentBalance - testData.gameCost + data.winAmount;
 
         await testGamblePage.setPatternValue(pattern);
         await testGamblePage.spin();
 
         expect(expectedBalance)
           .toBe(await testGamblePage.getCurrentBalance(),
-            `Balance was not increased on ${winAmount} coins for '${pattern}'`);
+            `Balance was not increased on ${data.winAmount} coins for '${pattern}'`);
       });
 
-      it(`should display win message with ${winAmount} amount`, async () => {
+      it(`should display win message with ${data.winAmount} amount`, async () => {
         expect(await testGamblePage.isWinboxDisplayed()).toBeTruthy('Winbox is not displayed');
         expect(await testGamblePage.getWinMessage())
-          .toBe(testData.winMessage.replace('#', winAmount), 'Win message content is incorrect');
+          .toBe(testData.winMessage(data.winAmount), 'Win message content is incorrect');
       });
 
-      it(`should blink '${combination}' combination in '${pattern}' line`, async () => {
+      it(`should blink '${data.combination}' combination in '${pattern}' line`, async () => {
         expect(await testGamblePage.getBlinkedCharacters())
-          .toBe(combination, `Matching ${combination} does not blink in '${pattern}' line`);
+          .toBe(data.combination, `Matching ${data.combination} does not blink in '${pattern}' line`);
       });
 
       it(`should disable spin button`, async () => {
@@ -51,17 +82,27 @@ describe('Test gamble', () => {
       });
 
       it(`should mark combination as achieved`, async () => {
-        expect(await testGamblePage.isWinAchieved(combination))
+        expect(await testGamblePage.isWinAchieved(data.combination))
           .toBeTruthy('Combination is not marked as achieved in paytable');
       });
     });
-  });
+  }
 
-  it('should not go to negative balance', async () => {
-    await testGamblePage.setPatternValue(testData.emptyPattern);
-    await testGamblePage.setBalance(testData.zeroBalance);
-    await testGamblePage.spin();
+  describe('with zero balance', () => {
+    beforeAll(async () => {
+      await testGamblePage.waitForSpinButtonEnabled();
+      await testGamblePage.setPatternValue(testData.emptyPattern);
+      await testGamblePage.setBalance(testData.zeroBalance);
+    });
 
-    expect(await testGamblePage.getCurrentBalance()).not.toBeLessThan(testData.zeroBalance);
+    it('should disable spin button', async () => {
+      expect(await testGamblePage.isSpinButtonEnabled()).toBeFalsy(testData.zeroBalance);
+    });
+
+    it('should not go to negative balance after spin', async () => {
+      await testGamblePage.spin();
+
+      expect(await testGamblePage.getCurrentBalance()).not.toBeLessThan(testData.zeroBalance);
+    });
   });
 });

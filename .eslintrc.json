@@ -2,8 +2,7 @@
   "extends": "standard",
   "globals": {
     "ptorHelper": true,
-    "projectDir": true,
-    "using": true
+    "projectDir": true
   },
   "env": {
     "browser": true,
@@ -13,6 +12,8 @@
   },
   "rules":{
     "max-line-length": [true, 120],
-    "semi": [2, "always"]
+    "semi": [2, "always"],
+    "no-return-await": [0],
+    "space-before-function-paren": [0]
   }
 }

@@ -1,6 +1,6 @@
 'use strict';
 
-function generateValidCombination (winCombination) {
+function generateValidCombination(winCombination) {
   const lineLength = 5;
   const countToAdd = lineLength - winCombination.length;
   if (countToAdd > 0) {

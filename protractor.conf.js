@@ -41,7 +41,6 @@ exports.config = {
 async function onPrepare () {
   global.projectDir = process.cwd();
   global.ptorHelper = require('protractor-helpers');
-  global.using = require('jasmine-data-provider');
 
   await browser.waitForAngularEnabled(false);
   const SpecReporter = require('jasmine-spec-reporter').SpecReporter;

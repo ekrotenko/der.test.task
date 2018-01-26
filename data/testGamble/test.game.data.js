@@ -1,22 +1,27 @@
+const winCombinations = [
+  {combination: '111', winAmount: 60},
+  {combination: '1111', winAmount: 80},
+  {combination: '11111', winAmount: 100},
+  {combination: '222', winAmount: 120},
+  {combination: '2222', winAmount: 160},
+  {combination: '22222', winAmount: 200},
+  {combination: '333', winAmount: 180},
+  {combination: '3333', winAmount: 240},
+  {combination: '33333', winAmount: 300},
+  {combination: '444', winAmount: 240},
+  {combination: '4444', winAmount: 320},
+  {combination: '44444', winAmount: 400},
+  {combination: '555', winAmount: 300},
+  {combination: '5555', winAmount: 400},
+  {combination: '55555', winAmount: 500}
+];
+
 module.exports = {
-  winMessage: 'Win # coins',
-  winCombinations: {
-    '111': 60,
-    '1111': 80,
-    '11111': 100,
-    '222': 120,
-    '2222': 160,
-    '22222': 200,
-    '333': 180,
-    '3333': 240,
-    '33333': 300,
-    '444': 240,
-    '4444': 320,
-    '44444': 400,
-    '555': 300,
-    '5555': 400,
-    '55555': 500
-  },
+  winMessage: winAmount => `Win ${winAmount} coins`,
+  winCombinations,
   zeroBalance: 0,
-  emptyPattern: ''
+  initialAchievementsCount: 0,
+  emptyPattern: '',
+  initialBalance: 1000,
+  gameCost: 1
 };
