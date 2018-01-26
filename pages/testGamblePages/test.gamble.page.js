@@ -1,47 +1,43 @@
 'use strict';
-const WebElementHelper = require(`${projectDir}/helpers/web.element.helper`);
+const webElementHelper = require(`${projectDir}/helpers/web.element.helper`);
 
-class TestGamble {
+class TestGamblePage {
   constructor () {
-    this.gameResults = $$('.notch2');
-    this.testDataField = $('#testdata');
-    this.currentBalance = $('#balance-value');
-    this.spinButton = $('#spinButton');
-    this.winbox = $('#winbox');
+    this._testDataField = $('#testdata');
+    this._currentBalance = $('#balance-value');
+    this._spinButton = $('#spinButton');
+    this._winBox = $('#winbox');
   }
 
-  async open () {
-    const url = htmlPages.testTask;
-    await browser.get(url);
-  }
+  static async open (fileName = 'Test_Task.html') {
+    await browser.get(fileName);
 
-  async getResult () {
-    return this.gameResults.getText();
+    return new TestGamblePage();
   }
 
   async setPatternValue (pattern) {
-    await browser.executeScript('arguments[0].value = arguments[1];', this.testDataField, pattern);
+    await browser.executeScript('arguments[0].value = arguments[1];', this._testDataField, pattern);
   }
 
   async getCurrentBalance () {
-    const currentBalance = await this.currentBalance.getAttribute('value');
+    const curBalance = await this._currentBalance.getAttribute('value');
 
-    return parseFloat(currentBalance);
+    return parseFloat(curBalance);
   }
 
   async spin () {
     await this.waitForSpinButtonEnabled();
-    await this.spinButton.click();
+    await this._spinButton.click();
   }
 
   async getWinMessage () {
-    await ptorHelper.waitForElement(this.winbox, 1000);
+    await ptorHelper.waitForElement(this._winBox, 1000);
 
-    return this.winbox.getText();
+    return this._winBox.getText();
   }
 
   async isWinboxDisplayed () {
-    return this.winbox.isDisplayed();
+    return this._winBox.isDisplayed();
   }
 
   async getBlinkedCharacters () {
@@ -49,21 +45,21 @@ class TestGamble {
   }
 
   async isSpinButtonEnabled () {
-    return this.spinButton.isEnabled();
+    return this._spinButton.isEnabled();
   }
 
   async waitForSpinButtonEnabled () {
-    await WebElementHelper.waitForElementEnabled(this.spinButton);
+    await webElementHelper.waitForElementEnabled(this._spinButton);
   }
 
   async isWinAchieved (combination) {
-    return WebElementHelper.hasClass($(`.win${combination}`), 'achievement');
+    return webElementHelper.hasClass($(`.win${combination}`), 'achievement');
   }
 
   async setBalance (value) {
-    await this.currentBalance.clear();
-    await this.currentBalance.sendKeys(value);
+    await this._currentBalance.clear();
+    await this._currentBalance.sendKeys(value);
   }
 }
 
-module.exports = new TestGamble();
+module.exports = TestGamblePage;

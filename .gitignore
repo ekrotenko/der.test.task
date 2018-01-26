@@ -2,6 +2,7 @@ node_modules
 .idea/
 **/.DS_Store
 *.iml
+*.html
 package-lock.json
 screenshots/
 html-report/

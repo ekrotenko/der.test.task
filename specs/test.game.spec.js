@@ -1,13 +1,14 @@
-const testGamblePage = require(`${projectDir}/pages/testGamblePages/test.gamble.page`);
+const TestGamblePage = require(`${projectDir}/pages/testGamblePages/test.gamble.page`);
 const dataHelper = require(`${projectDir}/helpers/data.helper`);
 
 const testData = require(`${projectDir}/data/testGamble/test.game.data`);
 
 describe('Test gamble', () => {
   let expectedBalance;
+  let testGamblePage;
 
   beforeAll(async () => {
-    await testGamblePage.open();
+    testGamblePage = await TestGamblePage.open();
   });
 
   it('should reduce balance on 1 coin after spin', async () => {

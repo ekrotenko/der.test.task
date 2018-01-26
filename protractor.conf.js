@@ -4,7 +4,7 @@ const moment = require('moment');
 exports.config = {
   framework: 'jasmine',
   directConnect: true,
-  baseUrl: 'PUT YOUR BASE URL HERE',
+  baseUrl: `file:///${process.cwd()}/htmlTestPages/`,
 
   capabilities: {
     logName: 'dervico.test',
@@ -43,10 +43,7 @@ async function onPrepare () {
   global.ptorHelper = require('protractor-helpers');
   global.using = require('jasmine-data-provider');
 
-  global.htmlPages = require('./html.pages.list');
-
   await browser.waitForAngularEnabled(false);
-  browser.resetUrl = 'file:///';
   const SpecReporter = require('jasmine-spec-reporter').SpecReporter;
   const params = {
     spec: {
