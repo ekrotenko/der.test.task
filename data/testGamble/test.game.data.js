@@ -23,5 +23,6 @@ module.exports = {
   initialAchievementsCount: 0,
   emptyPattern: '',
   initialBalance: 1000,
-  gameCost: 1
+  gameCost: 1,
+  spinAmount: 10
 };

@@ -1,6 +1,12 @@
 'use strict';
 
-function generateValidCombination(winCombination) {
+/**
+ * Generate expected combination of numbers from win combination and random missing digits,
+ * putting win combination to the random position
+ * @param winCombination - winning combination of digits
+ * @returns {*}
+ */
+function generateExpectedCombination(winCombination) {
   const lineLength = 5;
   const countToAdd = lineLength - winCombination.length;
   if (countToAdd > 0) {
@@ -12,5 +18,5 @@ function generateValidCombination(winCombination) {
 }
 
 module.exports = {
-  generateValidCombination
+  generateExpectedCombination
 };

@@ -11,7 +11,7 @@ Type `npm -v` in console(cmd | PowerShell | Terminal) to verify successful insta
 3) Put test html file (e.g. 'Test_task.html') to 'htmlTestPages' folder. Note: For the future development this file name is being used as value of parameter of open() function of page object
 
 ## Executing tests:
-Execute following command in terminal:
+Execute test run following command in terminal:
 ```text
 npm test
 ```
