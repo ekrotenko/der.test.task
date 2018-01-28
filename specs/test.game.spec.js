@@ -28,9 +28,7 @@ describe('Test gamble', () => {
       expect((await testGamblePage.getAchievedResults()).length)
         .toBe(testData.initialAchievementsCount, 'Some paytable records are achieved');
     });
-  });
 
-  describe('with random flow', () => {
     it(`should not generate same sequences of results on load`, async () => {
       const beforeRefresh = await testGamblePage.getListOfSpinResults(testData.spinAmount);
       await TestGamblePage.open();
@@ -38,7 +36,9 @@ describe('Test gamble', () => {
 
       expect(beforeRefresh).not.toBe(afterRefresh, 'Random result matches previous one');
     });
+  });
 
+  describe('with random flow', () => {
     it(`should reduce balance on ${testData.gameCost} coin after spin`, async () => {
       expectedBalance = await testGamblePage.getCurrentBalance() - testData.gameCost;
       await testGamblePage.spin();
