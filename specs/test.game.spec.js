@@ -38,18 +38,8 @@ describe('Test gamble', () => {
     });
   });
 
-  describe('with random flow', () => {
-    it(`should reduce balance on ${testData.gameCost} coin after spin`, async () => {
-      expectedBalance = await testGamblePage.getCurrentBalance() - testData.gameCost;
-      await testGamblePage.spin();
-
-      expect(expectedBalance)
-        .toBe(await testGamblePage.getCurrentBalance(), `Balance was note reduced on ${testData.gameCost} coin`);
-    });
-  });
-
   for (let data of testData.winCombinations) {
-    describe(`with win combination ${data.combination}`, () => {
+    describe(`with winning combination ${data.combination}`, () => {
       let currentBalance;
       let expectedCombination = dataHelper.generateExpectedCombination(data.combination);
 
